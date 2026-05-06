@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Abidin Tech International</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <style>
+        body {
+            background: linear-gradient(#0f2027, #203a43, #2c5364);
+            min-height: 100vh;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        /* View Control */
+        .view-section {
+            display: none;
+        }
+        .active-view {
+            display: block;
+        }
+
+        /* Login Styles */
+        .login-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .login-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        /* Home Styles */
+        .hero {
+            padding: 100px 0;
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 30px;
+            transition: 0.3s;
+            height: 100%;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Product Styles */
+        .product-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            height: 100%;
+        }
+        .product-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background-color: #ccc; /* Placeholder if image missing */
+        }
+        .summary-box {
+            background: rgba(255,255,255,0.15);
+            border-radius: 15px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="main-navbar" style="display: none;">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#" onclick="showView('home')">
+                <i class="bi bi-pc-display"></i> Abidin Tech International
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarMenu">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showView('home')" id="nav-home">Homepage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="alert('About Us page coming soon!')">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showView('product')" id="nav-product">Product</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="nav-link text-danger" href="#" onclick="logout()"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="login-view" class="view-section active-view">
+        <div class="login-wrapper">
+            <div class="login-card text-center">  
+                <h3 class="fw-bold mb-2">Abidin Tech International</h3>
+                <p class="mb-4">Login to continue</p>
+                <input type="text" id="username" class="form-control mb-3" placeholder="Username">
+                <input type="password" id="password" class="form-control mb-3" placeholder="Password">
+                <button class="btn btn-primary w-100" onclick="login()">Login</button>
+                <p class="text-danger mt-3" id="message"></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="home-view" class="view-section">
+        <section class="hero text-center">
+            <div class="container">
+                <h1 class="fw-bold display-4">Abidin Tech International</h1>
+                <h4>Buy the best computer accessories easily and quickly</h4>
+                <button class="btn btn-primary btn-lg mt-4" onclick="showView('product')">Buy Now</button>
+            </div>
+        </section>  
+
+        <section class="container text-center mt-5 mb-5">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-keyboard fs-1"></i>
+                        <h5 class="mt-3">Quality Products</h5>
+                        <p>High quality keyboards, mouse, and monitors</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-cart fs-1"></i>
+                        <h5 class="mt-3">Easy Shopping</h5>
+                        <p>Buy computer components in just a few clicks</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-lightning-charge fs-1"></i>
+                        <h5 class="mt-3">Trusted Store</h5>
+                        <p>Reliable computer parts and accessories</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center pb-4 mt-5">
+            © 2026 Abidin Tech International | Athaya
+        </footer>
+    </div>
+
+    <div id="product-view" class="view-section">
+        <div class="container py-5">
+            <h2 class="text-center mb-4">Computer Products</h2>
+            <div class="row g-4">
+                <div class="col-md-4"> 
+                    <div class="product-card">
+                        <img src="mouse.jpg" alt="Mouse">
+                        <h5>Mouse</h5>
+                        <p>Rp 150.000</p>
+                        <button class="btn btn-primary" onclick="addProduct('Mouse', 150000)">Buy</button>
+                    </div>
+                </div>
+                <div class="col-md-4"> 
+                    <div class="product-card">
+                        <img src="headphone1.jpg" alt="Headphone">
+                        <h5>Headphone</h5>
+                        <p>Rp 450.000</p>
+                        <button class="btn btn-primary" onclick="addProduct('Headphone', 450000)">Buy</button>
+                    </div>
+                </div>
+                <div class="col-md-4"> 
+                    <div class="product-card">
+                        <img src="speaker1.jpg" alt="Speaker">
+                        <h5>Speaker</h5>
+                        <p>Rp 245.000</p>
+                        <button class="btn btn-primary" onclick="addProduct('Speaker', 245000)">Buy</button>
+                    </div>
+                </div>
+            </div>          
+         
+            <div class="row mt-5 mb-5">
+                <div class="col-md-8 mx-auto">
+                    <div class="summary-box">
+                        <h4>Purchase Details</h4>
+                        <div id="itemList" class="mb-3"></div>
+                        <hr>
+                        <h5>Total Price:</h5>
+                        <h3 id="totalPrice">Rp 0</h3>
+                        <button class="btn btn-success w-100 mt-3" onclick="payNow()">Pay Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="text-center pb-4 mt-auto">
+            © 2026 Abidin Tech International | Athaya
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Set Credentials for Login
+        localStorage.setItem("username", "student");
+        localStorage.setItem("password", "12345");
+
+        // NAVIGATION LOGIC (Single Page Application Approach)
+        function showView(viewId) {
+            // Hide all views
+            document.querySelectorAll('.view-section').forEach(view => {
+                view.classList.remove('active-view');
+            });
+
+            // Show selected view
+            document.getElementById(viewId + '-view').classList.add('active-view');
+
+            // Manage Navbar visibility
+            if (viewId === 'login') {
+                document.getElementById('main-navbar').style.display = 'none';
+            } else {
+                document.getElementById('main-navbar').style.display = 'block';
+                
+                // Update active state on navbar links
+                document.getElementById('nav-home').classList.remove('active');
+                document.getElementById('nav-product').classList.remove('active');
+                if (document.getElementById('nav-' + viewId)) {
+                    document.getElementById('nav-' + viewId).classList.add('active');
+                }
+            }
+            window.scrollTo(0,0);
+        }
+
+        // LOGIN LOGIC
+        function login() {
+            let inputUsername = document.getElementById("username").value;
+            let inputPassword = document.getElementById("password").value;
+
+            let savedUsername = localStorage.getItem("username");
+            let savedPassword = localStorage.getItem("password");
+
+            if (inputUsername === savedUsername && inputPassword === savedPassword) {
+                document.getElementById("message").innerText = ""; // Clear errors
+                showView('home'); // Go to home instead of jumping to new page
+            } else {
+                document.getElementById("message").innerText = "Username or password is incorrect!";
+            }
+        }
+
+        // LOGOUT LOGIC
+        function logout() {
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
+            showView('login');
+            // Clear cart optionally when logging out
+            cart = {};
+            total = 0;
+            updateCart();
+        }
+
+        // CART LOGIC
+        let cart = {};
+        let total = 0;
+        let itemList = document.getElementById("itemList");
+        let totalPrice = document.getElementById("totalPrice");
+
+        function addProduct(name, price) {
+            if (cart[name]) {
+                cart[name].qty += 1;
+            } else {
+                cart[name] = {
+                    qty: 1,
+                    price: price
+                };
+            }
+            total += price;
+            updateCart();
+        }
+
+        function updateCart() {
+            itemList.innerHTML = "";
+            if (Object.keys(cart).length === 0) {
+                itemList.innerHTML = "<p class='text-muted'>Your cart is empty.</p>";
+            }
+
+            for (let item in cart) {
+                let div = document.createElement("div");
+                div.className = "d-flex justify-content-between my-2 border-bottom border-secondary pb-1";
+                div.innerHTML = `
+                    <span><strong>${item}</strong> (x${cart[item].qty})</span>
+                    <span>Rp ${(cart[item].qty * cart[item].price).toLocaleString('id-ID')}</span>
+                `;
+                itemList.appendChild(div);
+            }
+            totalPrice.innerText = "Rp " + total.toLocaleString('id-ID');
+        }
+
+        function payNow() {
+            if (total === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+            alert("Thank you for your purchase!");
+            // Reset cart
+            cart = {};
+            total = 0;
+            updateCart();
+        }
+
+        // Initialize cart UI on load
+        updateCart();
+    </script>
+</body>
+</html>
